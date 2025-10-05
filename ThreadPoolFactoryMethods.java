@@ -1,7 +1,4 @@
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class ThreadPoolFactoryMethods {
 
@@ -23,5 +20,11 @@ public class ThreadPoolFactoryMethods {
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         Future<?> submit1 = executorService.submit(() -> System.out.println("new single thread executor"));
         System.out.println(submit1);
+
+        ExecutorService executorService1 = Executors.newWorkStealingPool();
+        executorService1.submit(()-> System.out.println("for join pool"));
+
+        ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
+        forkJoinPool.submit(()-> System.out.println("for join using common pool"));
     }
 }
